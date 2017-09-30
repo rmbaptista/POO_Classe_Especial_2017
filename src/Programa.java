@@ -7,6 +7,25 @@ public class Programa {
 			ConjuntoDesordenado c = new ConjuntoDesordenado();
 			
 			b.inclua(7);
+            b.inclua(4);
+            b.inclua(9);
+            b.inclua(2);
+
+            c.inclua(1);
+            c.inclua(4);
+            c.inclua(8);
+            c.inclua(3);
+            c.inclua(7);
+
+            a = b.intersecaoCom(c); // agora em a deve ter: 4 e 7
+            	
+            //...
+            a = b.menos(c); // agora em a deve ter: 9 e 2
+                            // que é o que tem no b mas nao tem no c
+			
+			/*
+			 * Código abaixo funcionando e testado!
+			b.inclua(7);
 			b.inclua(4);
 			b.inclua(9);
 			b.inclua(2);
@@ -66,6 +85,11 @@ public class Programa {
 				System.out.println("a tem 0");
 			else
 				System.out.println("a nao tem 0"); // RESP
+			
+			System.out.println("==================");
+			c.getElemento();
+			c.getTaxaDeAcrescimo();
+			*/
 		
 		}
 		catch(Exception erro) {}
