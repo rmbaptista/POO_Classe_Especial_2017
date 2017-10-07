@@ -2,6 +2,47 @@
 public class Programa {
 	public static void main(String[] args) {
 		try {
+			// Início bloco 03
+	        ConjuntoDesordenado a = new ConjuntoDesordenado (15,20);
+	        a.inclua(0);
+	        a.inclua(8);
+	        a.inclua(6);
+
+	        ConjuntoDesordenado b = new ConjuntoDesordenado (15);
+	        b.inclua(1);
+	        b.inclua(9);
+	        b.inclua(7);
+
+	        ConjuntoDesordenado c = new ConjuntoDesordenado ();
+	        c.inclua(1);
+	        c.inclua(9);
+	        c.inclua(8);
+	        c.inclua(3);
+	        c.inclua(7);
+
+	        if (a.estaContidoEm(c))
+	            System.out.println ("a esta contido em c");
+	        else
+	            System.out.println ("a nao esta contido em c"); // isso é para acontecer
+
+	        if (b.estaContidoEm(c))
+	            System.out.println ("b esta contido em c"); // isso é para acontecer
+	        else
+	            System.out.println ("b nao esta contido em c"); 
+
+	        if (c.contem(a))
+	            System.out.println ("c contem a"); 
+	        else
+	            System.out.println ("c nao contem a"); // isso é para acontecer
+
+	        if (c.contem(b))
+	            System.out.println ("c contem b"); // isso é para acontecer
+	        else
+	            System.out.println ("c nao contem b"); 
+			// Fim bloco 03
+			
+			// Início bloco 02
+			/*
 			ConjuntoDesordenado a = null;
 			ConjuntoDesordenado b = new ConjuntoDesordenado();
 			ConjuntoDesordenado c = new ConjuntoDesordenado();
@@ -24,8 +65,11 @@ public class Programa {
             	
             a = b.menos(c); // agora em a deve ter: 9 e 2
                             // que é o que tem no b mas nao tem no c
-        	System.out.println(a);			
+        	System.out.println(a);
+        	*/
+        	// Fim do bloco 02
 			
+			// Início bloco 01
 			// Código abaixo funcionando e testado!
 //			b.inclua(7);
 //			b.inclua(4);
@@ -91,7 +135,7 @@ public class Programa {
 //			System.out.println("==================");
 //			c.getElemento();
 //			c.getTaxaDeAcrescimo();
-			
+			// Fim bloco 01
 		
 		}
 		catch(Exception erro) {

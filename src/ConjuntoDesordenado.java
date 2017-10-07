@@ -204,7 +204,45 @@ public class ConjuntoDesordenado {
     	return -1;
     }
     
+	/**
+	 * Deve retornar true, caso TODOS os elementos de
+     * this forem elementos do parametro do metodo (conj)
+	 * @param conj
+	 * @return boolean
+	 */
+    public boolean estaContidoEm (ConjuntoDesordenado conj) {
+    	if(conj == null)
+    		return false;
+    	
+    	if(this.ultimo > conj.ultimo)
+    		return false;
+    	
+    	for(int i=0; i<=this.ultimo; i++)
+    		if(!(conj.tem(this.elemento[i])))
+    			return false;
+    	
+    	return true;
+    }
+    
+    /**
+     * Compara se 'this' possui TODOS elementos dos elementos do conjunto do parâmetro (conj)
+     * @param conj
+     * @return boolean
+     */
+    public boolean contem (ConjuntoDesordenado conj) {
+        if(conj.ultimo > this.ultimo)
+        	return false;
+        
+        for(int i=0; i<=conj.elemento[i]; i++ )
+        	if(!(this.tem(conj.elemento[i])))
+        		return false;
+    	
+    	return true;
+    }
+    
+    /////////////////////////////////////////////
     // MÉTODOS APOCALÍPTICOS - MU HA HA HA
+    /////////////////////////////////////////////
     
     public boolean equals(Object obj) {
     	if(obj == null)
