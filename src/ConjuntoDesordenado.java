@@ -244,14 +244,62 @@ public class ConjuntoDesordenado {
     // MÉTODOS APOCALÍPTICOS - MU HA HA HA
     /////////////////////////////////////////////
     
+    /**
+     * Comparar em termis de conteúdo o 'this' que é do tipo ConjuntoDesordenado
+     * com obj que é do tipo Object e portanto pode ser qualquer coisa.
+     * Isso porque tudo herda de Object e logo, tudo pode ser considerado Object
+     * retornando true ou false
+     */
     public boolean equals(Object obj) {
+    	/*
+    	* Estou testando endereços de memória.
+    	* Se estiverem no mesmo endereço, possuem o mesmo conteúdo.
+    	*/
+    	if(this == obj)
+    		return true;
+    	
+    	/*
+    	 * Como temos certeza que this não é nulo (pois se ele chamou
+    	 * o método já quer dizer que ele não é nulo, porque se fosse,
+    	 * dária NullPointerException e não entraria aqui no método),
+    	 * podemos afirmar que se obj for nulo (ou seja, ele não foi instanciado,
+    	 * pois um objeto só é nulo quando ele não foi instanciado, não guardando
+    	 * nenhum endereço de memória) ele não é igual ao this.
+    	 */
     	if(obj == null)
     		return false;
     	
+    	if(!(obj instanceof ConjuntoDesordenado))
+    		return false;
+    	
+    	/*
+    	 * Chegando aqui, EUUUUU sei que estou comparando 2 (não 1 com dois objetos
+    	 * que referenciam o mesmo endereço de memória) ConjuntoDesordenado. Mas o
+    	 * Java obj ainda continua sendo Object.
+    	 */
+    	
+    	ConjuntoDesordenado conj = (ConjuntoDesordenado) obj;
+    	
+    	if(this.taxaDeCrescimento != conj.taxaDeCrescimento)
+    		return false;
+    	
+    	if(this.ultimo != conj.ultimo)
+    		return false;
+    	
+    	for(int i=0; i<=this.ultimo; i++)
+	    	if(this.elemento[i] != conj.elemento[i])
+	    		return false;
     	
     	return true;
     }
     
+    /**
+     * Calcular e retornar um número inteiro a partir dos dadosd que estão
+     * dentro do 'this'. O número que retornaremos servirá para
+     * estruturas de dados baseadas em hash
+     * determinarem o local de armazenamento de algo, 
+     * assim como localizarem alfo armazenado
+     */
     public int hashCode() {
     	int ret = 666;
     	 
@@ -275,6 +323,9 @@ public class ConjuntoDesordenado {
     	return ret;
     }
     
+    /**
+     * Formata no formato de uma String o que vai ser printado.
+     */
     public String toString() {
     	String ret = null;
     	
