@@ -16,6 +16,10 @@ public class ConjuntoDesordenado {
 		this.inicie(10, 10);
 	}
 	
+	public ConjuntoDesordenado(int tamanhoVetor) {
+		this.inicie(tamanhoVetor, 10);
+	}
+	
 	public ConjuntoDesordenado(int tamanhoVetor, int taxaDeCrescimento) {
 		// O this do construtor é SEMPRE quem o new criou.
 		this.inicie(tamanhoVetor, taxaDeCrescimento);
@@ -27,20 +31,28 @@ public class ConjuntoDesordenado {
 	}
 	
 	// GETTERS
-	public String getElemento() {
-		String elementosDoVetor = "";
-		for(int i = 0; i <= this.ultimo; i++) {
-			elementosDoVetor += i < this.ultimo ? this.elemento[i] + " / " : this.elemento[i];
-		}
-		return elementosDoVetor;
-	}
+//	public String getElemento() {
+//		String elementosDoVetor = "";
+//		for(int i = 0; i <= this.ultimo; i++) {
+//			elementosDoVetor += i < this.ultimo ? this.elemento[i] + " / " : this.elemento[i];
+//		}
+//		return elementosDoVetor;
+//	}
 	
 	public int getUltimo() {
 		return this.ultimo;
 	}
 	
-	public String getTaxaDeAcrescimo() {
-		return this.taxaDeCrescimento + "%";
+	public int[] getElemento() {
+		return elemento;
+	}
+
+	public void setElemento(int[] elemento) {
+		this.elemento = elemento;
+	}
+
+	public float getTaxaDeAcrescimo() {
+		return this.taxaDeCrescimento;
 	}
 	
 	// SETTERS
@@ -86,7 +98,7 @@ public class ConjuntoDesordenado {
 	 * @return boolean
 	 */
 	public boolean tem(int numAVerificar) {
-		return (this.kd(numAVerificar) != 1);
+		return (this.kd(numAVerificar) != -1);
 	}
 	
 	/**
@@ -138,7 +150,7 @@ public class ConjuntoDesordenado {
 	public ConjuntoDesordenado intersecaoCom(ConjuntoDesordenado conj) {
 		ConjuntoDesordenado conjuntoIntersecao = new ConjuntoDesordenado();
 		
-		for(int i = 0; i < this.ultimo; i++) {
+		for(int i = 0; i <= this.ultimo; i++) {
 			if(conj.tem(this.elemento[i])) {
 				try {
 					conjuntoIntersecao.inclua(this.elemento[i]);	
@@ -151,14 +163,15 @@ public class ConjuntoDesordenado {
 	}
 
 	/**
-	 * 
+	 * Remove do vetor do objeto que chama o método (this) os elementos do vetor
+	 * do objeto passado no parâmetro
 	 * @param conj
 	 * @return Object
 	 */
     public ConjuntoDesordenado menos (ConjuntoDesordenado conj)
     {
     	ConjuntoDesordenado conjunto = new ConjuntoDesordenado();
-    	for(int i = 0; i < this.ultimo; i++) {
+    	for(int i = 0; i <= this.ultimo; i++) {
     		if(conj.tem(this.elemento[i]))
     			continue;
 			try {
@@ -184,10 +197,66 @@ public class ConjuntoDesordenado {
      * @return int
      */
     private int kd(int x) {
-    	for(int i = 0; i<this.ultimo; i++)
+    	for(int i = 0; i<=this.ultimo; i++)
     		if(x == this.elemento[i])
     			return i;
     	
     	return -1;
+    }
+    
+    // MÉTODOS APOCALÍPTICOS - MU HA HA HA
+    
+    public boolean equals(Object obj) {
+    	if(obj == null)
+    		return false;
+    	
+    	
+    	return true;
+    }
+    
+    public int hashCode() {
+    	int ret = 666;
+    	 
+    	/*
+    	 * if(this.ultimo != null) {
+    	 *     ret = 7 * ret + this.ultimo.hashCode();
+    	 * }
+    	 * Fazemos desse jeito abaixo, pois int não é um Objeto, se fosse faríamos da maneira comentada acima:
+    	 */
+    	ret = 7 * ret + new Integer(this.ultimo).hashCode();
+    	ret = 7 * ret + new Float(this.taxaDeCrescimento).hashCode();
+    	
+    	for(int posicao : this.elemento)
+    		ret = 7 * ret + new Integer(posicao).hashCode();
+    	/*
+    	 * O loop acima poderia ser com o for tradicional, como abaixo:
+    	 * for(int i=0; i<=this.ultimo;i++
+    	 *     ret = 7 * ret + new Integer(this.elemento[i]).hashCode();
+    	 */
+    	
+    	return ret;
+    }
+    
+    public String toString() {
+    	String ret = null;
+    	
+    	if(this.ultimo == -1) {
+    		ret =  "===============\n";
+    		ret += "Conjunto vazio!";
+    		ret += "===============";
+    		return "";
+    	}
+    	
+    	ret =  "===============\n";
+    	ret += "Último: " + this.ultimo + "\n";
+    	ret += "Elementos do vetor: {";
+    	for(int i = 0; i < this.ultimo; i++)
+			ret += this.ultimo != i ? this.elemento[i] + ", " : this.elemento[i];
+    	ret += this.elemento[this.ultimo];
+    	ret += "}\n";
+    	ret += "Taxa de crescimento: " + this.taxaDeCrescimento + "%\n";
+    	ret += "===============";
+    	
+    	return ret;
     }
 }
